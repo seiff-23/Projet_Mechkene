@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { ProduitGaming } from '../../models/produit-gaming';
 import { ProduitItem } from '../produit-item/produit-item';
 
@@ -9,6 +9,9 @@ import { ProduitItem } from '../produit-item/produit-item';
   templateUrl: './catalogue.html',
 })
 export class Catalogue {
+  nomRecherche = signal('');
+  prixMaximum = signal('');
+
   produits = signal<ProduitGaming[]>([
     {
       id: 'GZ001', nom: 'Logitech G203 LIGHTSYNC', photo: 'images/g203.png',
@@ -74,4 +77,14 @@ export class Catalogue {
       ],
     },
   ]);
+
+  produitsFiltres = computed(() => this.produits().filter(produit =>
+    (this.nomRecherche() === '' || produit.nom === this.nomRecherche()) &&
+    (this.prixMaximum() === '' || produit.prix <= +this.prixMaximum())
+  ));
+
+  onEffacer() {
+    this.nomRecherche.set('');
+    this.prixMaximum.set('');
+  }
 }

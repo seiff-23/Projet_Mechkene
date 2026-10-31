@@ -31,4 +31,6 @@ Les photos proviennent des pages officielles Logitech et sont stockées dans pub
 - RouterLink et route statique catalogue : cours routage et TP6.
 - Cartes, colonnes, badges et CSS simple : cours Bootstrap et TP2/TP5.
 
-La recherche, la comparaison, les détails, les statistiques et la gestion administrateur ne sont pas encore implémentés. Les services, le serveur JSON, les signal forms et le routage dynamique attendent les supports correspondants ou l'accord de l'étudiant.
+La recherche instantanée utilise deux signals, computed et filter : nom exact (égalité, sensible aux majuscules) et prix maximum facultatif. Le champ prix reste un texte lu via .value ; l'opérateur + convertit cette valeur en nombre pour la comparaison. Les champs sont liés avec [value] et (input), sans nouvelle API de formulaire. Les méthodes includes et toLowerCase ne sont pas utilisées, conformément au choix de l'étudiant.
+
+La comparaison, les détails, les statistiques et la gestion administrateur ne sont pas encore implémentés. Les services, le serveur JSON, les signal forms et le routage dynamique attendent les supports correspondants ou l'accord de l'étudiant.

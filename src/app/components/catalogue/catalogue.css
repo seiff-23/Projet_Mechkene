@@ -7,3 +7,24 @@ h1 {
   background-color: #292334;
   color: #d5bfff;
 }
+
+h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.form-control {
+  background-color: #101014;
+  border: 1px solid #575160;
+  color: #f3f2f7;
+}
+
+.form-control:focus {
+  background-color: #101014;
+  border-color: #c4a6ff;
+  color: #f3f2f7;
+}
+
+.form-control::placeholder {
+  color: #a39cab;
+}
