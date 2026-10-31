@@ -1,0 +1,35 @@
+body {
+  background-color: #101014;
+  color: #f3f2f7;
+  font-family: Arial, sans-serif;
+}
+
+a {
+  color: #c4a6ff;
+}
+
+.texte-violet {
+  color: #c4a6ff;
+}
+
+.texte-secondaire {
+  color: #b5b2c0;
+}
+
+.bloc-sombre {
+  background-color: #1b1a22;
+  border: 1px solid #35323f;
+  border-radius: 12px;
+}
+
+.btn-violet {
+  background-color: #8950e8;
+  border: 1px solid #8950e8;
+  color: white;
+}
+
+.btn-violet:hover {
+  background-color: #7440cc;
+  border-color: #7440cc;
+  color: white;
+}
