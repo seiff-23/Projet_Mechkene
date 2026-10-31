@@ -1,0 +1,45 @@
+.card {
+  color: #f3f2f7;
+  height: 100%;
+}
+
+.photo-produit {
+  background-color: #efedf3;
+  border-radius: 11px 11px 0 0;
+  padding: 24px;
+}
+
+.photo-produit img {
+  width: 100%;
+  height: 230px;
+  object-fit: contain;
+}
+
+.card-title {
+  font-size: 19px;
+  min-height: 46px;
+}
+
+.categorie {
+  font-size: 14px;
+}
+
+.connexion {
+  background-color: #36333f;
+  color: #e1dee9;
+}
+
+.sans-fil {
+  background-color: #3c2b56;
+  color: #d5bfff;
+}
+
+.prix {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.prix span {
+  font-size: 15px;
+  color: #c4a6ff;
+}

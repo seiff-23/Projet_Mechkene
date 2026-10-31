@@ -1,1 +1,17 @@
-<p>catalogue works!</p>
+<div class="container mt-5">
+  <p class="texte-violet">LE CATALOGUE GAMEZONE</p>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Nos accessoires gaming</h1>
+    <span class="badge compteur p-3">{{ produits().length }} produits</span>
+  </div>
+  <p class="texte-secondaire mb-4">Des modèles réels pour ton équipement. Les prix affichés sont des exemples en DT.</p>
+  <div class="row">
+    @for (produit of produits(); track produit.id) {
+      <div class="col-md-4 mb-4">
+        <app-produit-item [produit]="produit" />
+      </div>
+    } @empty {
+      <p class="texte-secondaire">Aucun produit dans le catalogue.</p>
+    }
+  </div>
+</div>
