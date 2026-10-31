@@ -27,15 +27,33 @@
     <p class="texte-secondaire mb-0">Le nom doit être identique à celui de la carte, majuscules comprises. Tu peux utiliser un seul critère ou combiner les deux.</p>
   </div>
   <p class="texte-secondaire">{{ produitsFiltres().length }} résultat(s) sur {{ produits().length }} produits</p>
+  <p class="texte-secondaire">La comparaison est disponible pour les catégories contenant au moins deux produits.</p>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <span class="texte-secondaire">Comparaison : {{ selection().length }} / 2 produits</span>
+    @if (selection().length > 0) {
+      <span class="texte-violet">Retrouve ta sélection sous les produits.</span>
+    }
+  </div>
   <div class="row">
     @for (produit of produitsFiltres(); track produit.id) {
       <div class="col-md-4 mb-4">
-        <app-produit-item [produit]="produit" />
+        <app-produit-item [produit]="produit"
+          [selectionne]="estSelectionne(produit)" [bloque]="estBloque(produit)"
+          (comparer)="onComparer($event)" />
       </div>
     } @empty {
       <div class="col-md-12">
         <p class="bloc-sombre texte-secondaire p-4">Aucun produit ne correspond à ta recherche. Vérifie le nom exact ou augmente le prix maximum.</p>
       </div>
     }
+  </div>
+  <div id="comparaison" class="bloc-sombre p-4 mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2 class="mb-0">Comparer les produits</h2>
+      @if (selection().length > 0) {
+        <button type="button" class="btn btn-violet" (click)="onViderSelection()">Vider la sélection</button>
+      }
+    </div>
+    <app-comparaison [produits]="selection()" (retirer)="onRetirer($event)" />
   </div>
 </div>

@@ -1,1 +1,76 @@
-<p>comparaison works!</p>
+@if (produits().length === 0) {
+  <p class="texte-secondaire mb-0">Coche deux produits de la même catégorie pour les comparer.</p>
+} @else {
+  <ul class="selection-produits">
+    @for (produit of produits(); track produit.id) {
+      <li class="d-flex justify-content-between align-items-center mb-2">
+        <span>{{ produit.nom }}</span>
+        <button type="button" class="btn btn-dark btn-sm" (click)="onRetirer(produit.id)">Retirer</button>
+      </li>
+    }
+  </ul>
+  @if (produits().length === 1) {
+    <p class="texte-secondaire mb-0">Choisis encore un produit de la catégorie {{ produits()[0].categorie }}. Tu peux modifier la recherche sans perdre ta sélection.</p>
+  }
+}
+
+@if (produits().length === 2) {
+  <div class="table-responsive mt-4">
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th>Critère</th>
+          @for (produit of produits(); track produit.id) {
+            <th>{{ produit.nom }}</th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>Photo</th>
+          @for (produit of produits(); track produit.id) {
+            <td class="photo"><img [src]="produit.photo" [alt]="produit.nom"></td>
+          }
+        </tr>
+        <tr>
+          <th>Marque</th>
+          @for (produit of produits(); track produit.id) {
+            <td>{{ produit.marque }}</td>
+          }
+        </tr>
+        <tr>
+          <th>Catégorie</th>
+          @for (produit of produits(); track produit.id) {
+            <td>{{ produit.categorie }}</td>
+          }
+        </tr>
+        <tr>
+          <th>Prix</th>
+          @for (produit of produits(); track produit.id) {
+            <td class="texte-violet">{{ produit.prix | number:'1.3-3' }} DT</td>
+          }
+        </tr>
+        <tr>
+          <th>Connexion</th>
+          @for (produit of produits(); track produit.id) {
+            <td>
+              @if (produit.sansFil) { Sans fil } @else { Filaire }
+            </td>
+          }
+        </tr>
+        <tr>
+          <th>Caractéristiques</th>
+          @for (produit of produits(); track produit.id) {
+            <td>
+              <ul>
+                @for (caracteristique of produit.caracteristiques; track $index) {
+                  <li>{{ caracteristique.nom }} : {{ caracteristique.valeur }}</li>
+                }
+              </ul>
+            </td>
+          }
+        </tr>
+      </tbody>
+    </table>
+  </div>
+}

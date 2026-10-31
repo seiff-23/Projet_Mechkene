@@ -43,3 +43,24 @@
   font-size: 15px;
   color: #c4a6ff;
 }
+
+.produit-selectionne {
+  border-color: #c4a6ff;
+}
+
+.choix-comparaison {
+  border-top: 1px solid #35323f;
+  padding-top: 18px;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.choix-comparaison input {
+  width: 18px;
+  height: 18px;
+}
+
+.choix-bloque {
+  color: #a39cab;
+  cursor: default;
+}

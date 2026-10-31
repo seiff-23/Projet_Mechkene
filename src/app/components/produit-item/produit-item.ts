@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { ProduitGaming } from '../../models/produit-gaming';
 
@@ -10,4 +10,11 @@ import { ProduitGaming } from '../../models/produit-gaming';
 })
 export class ProduitItem {
   produit = input.required<ProduitGaming>();
+  selectionne = input.required<boolean>();
+  bloque = input.required<boolean>();
+  comparer = output<ProduitGaming>();
+
+  onComparer() {
+    this.comparer.emit(this.produit());
+  }
 }
