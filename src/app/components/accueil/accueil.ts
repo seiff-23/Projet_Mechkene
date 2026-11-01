@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Catalogue } from '../catalogue/catalogue';
 
 @Component({
-  imports: [RouterLink],
+  imports: [Catalogue],
   selector: 'app-accueil',
   styleUrl: './accueil.css',
   templateUrl: './accueil.html',
