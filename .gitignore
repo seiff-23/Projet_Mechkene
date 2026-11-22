@@ -46,3 +46,4 @@ Thumbs.db
 # Compte de démonstration local
 /src/database/gamezone.json
 /.vercel
+.vercel
