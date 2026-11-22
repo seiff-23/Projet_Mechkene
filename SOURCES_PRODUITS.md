@@ -35,4 +35,5 @@ La recherche instantanée utilise deux signals, computed et filter : nom exact (
 
 La comparaison utilise une case à cocher par carte, input.required pour l'état coché et désactivé, output pour transmettre les choix au parent et un signal pour la sélection. Elle accepte deux produits au maximum dans une même catégorie. Les catégories qui n'ont qu'un produit ne sont pas comparables. Le tableau Comparaison reçoit la sélection par input et émet l'identifiant à retirer avec output. Les filtres ne suppriment pas la sélection. Aucune méthode includes ou toLowerCase n'est utilisée.
 
-Les détails, les statistiques et la gestion administrateur ne sont pas encore implémentés. Les services, le serveur JSON, les signal forms et le routage dynamique attendent les supports correspondants ou l'accord de l'étudiant.
+Finalisation du 22 novembre : détails et routes paramétrées (TP7), ProduitService et AuthService avec HttpClient, Observable et pipe/tap (TP8), formulaires validés et caractéristiques dynamiques avec Signal Forms (TP9), statistiques avec computed et pipe personnalisé prixDt. Le fichier de données local est gamezone.json ; seule sa copie d’exemple sans compte est publiée sur GitHub. Angular est prévu sur Vercel et l’API reste locale, selon le choix de l’étudiant.
+
