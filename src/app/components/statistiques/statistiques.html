@@ -1,1 +1,14 @@
-<p>statistiques works!</p>
+<h1>Statistiques du catalogue</h1>
+@if (erreur()) { <p class="alert alert-danger">{{ erreur() }}</p> }
+<div class="bloc-sombre p-4 mt-3">
+  <p>Nombre total de produits : <strong>{{ nombreTotal() }}</strong></p>
+  <p>Prix moyen : {{ prixMoyen() | number:'1.3-3' | prixDt }}</p>
+  <p>Prix minimum : {{ prixMinimum() | number:'1.3-3' | prixDt }}</p>
+  <p>Prix maximum : {{ prixMaximum() | number:'1.3-3' | prixDt }}</p>
+  <h2>Produits par catégorie</h2>
+  <ul>
+    @for (categorie of categories; track $index) {
+      <li>{{ categorie }} : {{ nombreParCategorie(categorie) }}</li>
+    }
+  </ul>
+</div>

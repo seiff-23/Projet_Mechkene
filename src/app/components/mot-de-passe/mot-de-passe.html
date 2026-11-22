@@ -1,0 +1,21 @@
+<h1>Changer le mot de passe</h1>
+<form class="bloc-sombre p-4 mt-3" [formRoot]="motDePasseForm" (submit)="onModifier()">
+  <label for="ancien">Ancien mot de passe</label>
+  <input id="ancien" type="password" class="form-control mb-3" [formField]="motDePasseForm.ancien">
+  @if (motDePasseForm.ancien().touched()) {
+    @for (e of motDePasseForm.ancien().errors(); track $index) { <p class="text-danger">{{ e.message }}</p> }
+  }
+  <label for="nouveau">Nouveau mot de passe</label>
+  <input id="nouveau" type="password" class="form-control mb-3" [formField]="motDePasseForm.nouveau">
+  @if (motDePasseForm.nouveau().touched()) {
+    @for (e of motDePasseForm.nouveau().errors(); track $index) { <p class="text-danger">{{ e.message }}</p> }
+  }
+  <label for="confirmation">Confirmer le nouveau mot de passe</label>
+  <input id="confirmation" type="password" class="form-control mb-3" [formField]="motDePasseForm.confirmation">
+  @if (motDePasseForm.confirmation().touched()) {
+    @for (e of motDePasseForm.confirmation().errors(); track $index) { <p class="text-danger">{{ e.message }}</p> }
+  }
+  @if (message()) { <p class="alert alert-success">{{ message() }}</p> }
+  @if (erreur()) { <p class="alert alert-danger">{{ erreur() }}</p> }
+  <button type="submit" class="btn btn-violet" [disabled]="motDePasseForm().invalid() || enCours()">Modifier</button>
+</form>

@@ -1,4 +1,6 @@
 <div class="container mt-5">
+  @if (chargement()) { <p>Chargement du catalogue...</p> }
+  @if (erreur()) { <p class="alert alert-danger">{{ erreur() }}</p> }
   <p class="texte-violet">LE CATALOGUE GAMEZONE</p>
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h1>Nos accessoires gaming</h1>

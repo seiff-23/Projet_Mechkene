@@ -1,0 +1,19 @@
+<div class="container mt-5">
+  <div class="bloc-sombre p-4">
+    <h1>Connexion administrateur</h1>
+    <form [formRoot]="connexionForm" (submit)="onConnexion()">
+      <label for="login">Identifiant</label>
+      <input id="login" type="text" class="form-control mb-3" [formField]="connexionForm.login">
+      @if (connexionForm.login().touched()) {
+        @for (e of connexionForm.login().errors(); track $index) { <p class="text-danger">{{ e.message }}</p> }
+      }
+      <label for="motDePasse">Mot de passe</label>
+      <input id="motDePasse" type="password" class="form-control mb-3" [formField]="connexionForm.motDePasse">
+      @if (connexionForm.motDePasse().touched()) {
+        @for (e of connexionForm.motDePasse().errors(); track $index) { <p class="text-danger">{{ e.message }}</p> }
+      }
+      @if (erreur()) { <p class="alert alert-danger">{{ erreur() }}</p> }
+      <button type="submit" class="btn btn-violet" [disabled]="connexionForm().invalid() || enCours()">Se connecter</button>
+    </form>
+  </div>
+</div>

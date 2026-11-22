@@ -1,0 +1,15 @@
+<div class="container mt-4">
+  @if (authService.connecte()) {
+    <nav class="bloc-sombre p-3 d-flex flex-wrap gap-3 mb-4">
+      <a routerLink="/admin/produits" routerLinkActive="texte-violet">Produits</a>
+      <a routerLink="/admin/ajouter" routerLinkActive="texte-violet">Ajouter</a>
+      <a routerLink="/admin/statistiques" routerLinkActive="texte-violet">Statistiques</a>
+      <a routerLink="/admin/mot-de-passe" routerLinkActive="texte-violet">Mot de passe</a>
+      <button type="button" class="btn btn-outline-light btn-sm" (click)="onDeconnexion()">Déconnexion</button>
+    </nav>
+    <router-outlet />
+  } @else {
+    <p class="alert alert-warning">Connecte-toi pour accéder à l’administration.</p>
+    <a routerLink="/connexion" class="btn btn-violet">Se connecter</a>
+  }
+</div>

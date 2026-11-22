@@ -1,59 +1,66 @@
-# ProjetMechkene
+# GameZone
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.0.
+Mini-projet Angular de Seif Eddine Mechkene. Catalogue d'accessoires gaming avec espace visiteur et espace administrateur.
 
-## Development server
+## Lancer le projet pour la validation
 
-To start a local development server, run:
+Installer Node.js, puis ouvrir deux terminaux dans le dossier Projet_Mechkene.
 
-```bash
-ng serve
+```powershell
+npm install
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Premier terminal :
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```powershell
+npm run api
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Deuxième terminal :
 
-```bash
-ng generate --help
+```powershell
+ng serve --port 4220
 ```
 
-## Building
+Application : http://localhost:4220. API : http://localhost:3010.
 
-To build the project run:
+Le rendu local comporte un compte de démonstration, indiqué dans la fiche de lancement remise avec le projet. Aucun identifiant personnel n'est publié ici.
 
-```bash
-ng build
+Pour une installation depuis GitHub, copier `src/database/gamezone.example.json` vers `src/database/gamezone.json`, puis renseigner votre compte dans la collection administrateurs :
+
+```json
+{ "id": "admin1", "login": "votre_identifiant", "motDePasse": "votre_mot_de_passe" }
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Ne pas publier votre fichier local gamezone.json.
 
-## Running unit tests
+## Fonctionnalités
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+- Catalogue avec composant parent Catalogue et enfant ProduitItem.
+- Recherche automatique par nom exact, sensible aux majuscules, et prix maximum ; critères séparés ou combinés.
+- Détail avec route `/catalogue/:id` et affichage de tous les champs.
+- Comparaison par cases à cocher de deux produits de même catégorie.
+- Connexion administrateur, consultation, recherche, ajout, modification et suppression.
+- Formulaire Signal Forms avec validation et caractéristiques ajoutées dynamiquement.
+- Changement du mot de passe et déconnexion.
+- Statistiques : effectif total, effectif par catégorie et prix moyen/minimum/maximum.
 
-```bash
-ng test
-```
+## Données et notions du cours
 
-## Running end-to-end tests
+`src/database/gamezone.json` est l'unique fichier de données. Il contient les collections `produits` et `administrateurs`. JSON Server génère l'identifiant lors d'un ajout. Les photos fournies sont dans `public/images` ; le formulaire accepte aussi un chemin ou une URL de photo.
 
-For end-to-end (e2e) testing, run:
+Le projet utilise les notions des TP : interfaces, signal/computed, input/output, services injectés, HttpClient et pipe/tap/subscribe, routes imbriquées et paramétrées, Signal Forms, pipes, bindings et Bootstrap. Le pipe personnalisé prixDt ajoute DT après le formatage par number.
 
-```bash
-ng e2e
-```
+## Limites de la démonstration pédagogique
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+La connexion est gérée par un signal en mémoire et se réinitialise après actualisation du navigateur. Il faut alors se reconnecter. JSON Server ne fournit pas une authentification sécurisée côté serveur : le compte est un compte de démonstration et ses valeurs sont stockées dans le JSON, comme les autres données du TP. Les identifiants réels ne doivent pas être utilisés.
 
-## Additional Resources
+## Déploiement Vercel
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Framework : Angular. Commande de compilation : `npm run build`. Dossier de sortie : `dist/Projet_Mechkene/browser`. `vercel.json` redirige les accès directs vers index.html pour le routage Angular.
+
+Choix de l'étudiant : Angular est publié sur Vercel, l'API reste locale pour la validation. Le fichier `src/environments/environment.ts` pointe donc vers `http://localhost:3010`. Le site hébergé ne constitue pas un service autonome pour les autres visiteurs : les données nécessitent que JSON Server soit lancé sur le PC qui le consulte, et que le navigateur autorise l'accès local. Il faut montrer la version locale pendant la validation. Une API hébergée peut être configurée plus tard en remplaçant apiUrl.
+
+## Vérifications
+
+Compilation Angular ; parcours navigateur du catalogue, recherche combinée, comparaison, détails, connexion acceptée/refusée, ajout/modification/suppression d'un produit temporaire et recalcul des statistiques. Les services HTTP et le changement persistant de mot de passe ont aussi été vérifiés avec une copie indépendante du fichier JSON, sans changer le compte de démonstration du projet.

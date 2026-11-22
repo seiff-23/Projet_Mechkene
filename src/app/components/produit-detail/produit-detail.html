@@ -1,1 +1,29 @@
-<p>produit-detail works!</p>
+<div class="container mt-5">
+  <a routerLink="/catalogue">Retour au catalogue</a>
+  @if (chargement()) { <p>Chargement...</p> }
+  @if (erreur()) { <p class="alert alert-danger mt-3">{{ erreur() }}</p> }
+  @if (produit().id !== '') {
+    <div class="bloc-sombre p-4 mt-4 row">
+      <div class="col-md-5 text-center">
+        <img class="photo-detail" [src]="produit().photo" [alt]="produit().nom">
+      </div>
+      <div class="col-md-7">
+        <h1>{{ produit().nom }}</h1>
+        <p>{{ produit().marque }} — {{ produit().categorie }}</p>
+        <h2 class="texte-violet">{{ produit().prix | number:'1.3-3' | prixDt }}</h2>
+        <p>{{ produit().description }}</p>
+        <p>Identifiant : {{ produit().id }}</p>
+        <p>Date de sortie : {{ produit().dateSortie | date:'dd/MM/yyyy' }}</p>
+        <p [class.texte-violet]="produit().sansFil">Connexion :
+          @if (produit().sansFil) { Sans fil } @else { Filaire }
+        </p>
+        <h3>Caractéristiques</h3>
+        <ul>
+          @for (c of produit().caracteristiques; track $index) {
+            <li>{{ c.nom }} : {{ c.valeur }}</li>
+          } @empty { <li>Aucune caractéristique renseignée.</li> }
+        </ul>
+      </div>
+    </div>
+  }
+</div>

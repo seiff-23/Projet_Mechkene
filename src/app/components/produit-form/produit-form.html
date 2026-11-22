@@ -1,0 +1,88 @@
+<h1>@if (modification()) { Modifier un produit } @else { Ajouter un produit }</h1>
+@if (erreur()) { <p class="alert alert-danger">{{ erreur() }}</p> }
+@if (chargement()) { <p>Chargement...</p> }
+@if (!chargement() && (!modification() || produitModel().id !== '')) {
+<form class="bloc-sombre p-4 mt-3" [formRoot]="produitForm" (submit)="onEnregistrer()">
+  <div class="mb-3">
+    <label for="nom">Nom</label>
+    <input id="nom" type="text" class="form-control" [formField]="produitForm.nom">
+    @if (produitForm.nom().touched()) {
+      @for (e of produitForm.nom().errors(); track $index) { <p class="text-danger">{{ e.message }}</p> }
+    }
+  </div>
+  <div class="mb-3">
+    <label for="photo">Chemin ou URL de la photo</label>
+    <input id="photo" type="text" class="form-control" [formField]="produitForm.photo">
+    @if (produitForm.photo().touched()) {
+      @for (e of produitForm.photo().errors(); track $index) { <p class="text-danger">{{ e.message }}</p> }
+    }
+  </div>
+  <div class="mb-3">
+    <label for="prix">Prix en DT</label>
+    <input id="prix" type="number" class="form-control" [formField]="produitForm.prix">
+    @if (produitForm.prix().touched()) {
+      @for (e of produitForm.prix().errors(); track $index) { <p class="text-danger">{{ e.message }}</p> }
+    }
+  </div>
+  <div class="mb-3">
+    <label for="marque">Marque</label>
+    <input id="marque" type="text" class="form-control" [formField]="produitForm.marque">
+    @if (produitForm.marque().touched()) {
+      @for (e of produitForm.marque().errors(); track $index) { <p class="text-danger">{{ e.message }}</p> }
+    }
+  </div>
+  <div class="mb-3">
+    <label for="dateSortie">Date de sortie</label>
+    <input id="dateSortie" type="date" class="form-control" [formField]="produitForm.dateSortie">
+    @if (produitForm.dateSortie().touched()) {
+      @for (e of produitForm.dateSortie().errors(); track $index) { <p class="text-danger">{{ e.message }}</p> }
+    }
+  </div>
+  <p class="texte-secondaire">Photos disponibles : images/g203.png, images/g305.png, images/g413.png, images/g435.png, images/f310.png, images/f710.png. Une URL d’image publique peut aussi être saisie.</p>
+  <div class="mb-3">
+    <label for="categorie">Catégorie</label>
+    <select id="categorie" class="form-select" [formField]="produitForm.categorie">
+      @for (categorie of categories; track $index) { <option [value]="categorie">{{ categorie }}</option> }
+    </select>
+  </div>
+  <div class="mb-3">
+    <label><input type="checkbox" [formField]="produitForm.sansFil"> Sans fil</label>
+  </div>
+  <div class="mb-3">
+    <label for="description">Description</label>
+    <textarea id="description" class="form-control" [formField]="produitForm.description"></textarea>
+    @if (produitForm.description().touched()) {
+      @for (e of produitForm.description().errors(); track $index) { <p class="text-danger">{{ e.message }}</p> }
+    }
+  </div>
+  <h2>Caractéristiques</h2>
+  @for (c of produitForm.caracteristiques; track $index) {
+    <div class="row mb-3">
+      <div class="col-md-5">
+        <label>Nom de la caractéristique {{ $index + 1 }}
+          <input class="form-control" type="text" [formField]="c.nom">
+        </label>
+        @if (c.nom().touched()) {
+          @for (e of c.nom().errors(); track $index) { <p class="text-danger">{{ e.message }}</p> }
+        }
+      </div>
+      <div class="col-md-5">
+        <label>Valeur de la caractéristique {{ $index + 1 }}
+          <input class="form-control" type="text" [formField]="c.valeur">
+        </label>
+        @if (c.valeur().touched()) {
+          @for (e of c.valeur().errors(); track $index) { <p class="text-danger">{{ e.message }}</p> }
+        }
+      </div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-danger mt-4" (click)="onSupprimerCaracteristique($index)">Retirer</button>
+      </div>
+    </div>
+  }
+  <button class="btn btn-outline-light mb-4" type="button" (click)="onAjouterCaracteristique()">Ajouter une caractéristique</button>
+  <div>
+    <button class="btn btn-violet me-3" type="submit" [disabled]="produitForm().invalid() || enCours()">Enregistrer</button>
+    <a routerLink="/admin/produits">Annuler</a>
+  </div>
+</form>
+}

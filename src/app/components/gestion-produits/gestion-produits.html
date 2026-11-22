@@ -1,0 +1,32 @@
+<h1>Gestion des produits</h1>
+<div class="bloc-sombre p-3 mb-4">
+  <label for="rechercheAdmin">Rechercher par nom exact</label>
+  <input #recherche id="rechercheAdmin" class="form-control mt-2" type="text"
+    [value]="nomRecherche()" (input)="nomRecherche.set(recherche.value)">
+  <button class="btn btn-violet mt-2" type="button" (click)="nomRecherche.set('')">Effacer</button>
+</div>
+@if (erreur()) { <p class="alert alert-danger">{{ erreur() }}</p> }
+<div class="table-responsive">
+  <table class="table table-dark">
+    <thead><tr><th>Photo</th><th>Nom</th><th>Catégorie</th><th>Prix</th><th>Actions</th></tr></thead>
+    <tbody>
+      @for (p of produitsFiltres(); track p.id) {
+        <tr>
+          <td><img class="mini-photo" [src]="p.photo" [alt]="p.nom"></td>
+          <td>{{ p.nom }}</td><td>{{ p.categorie }}</td>
+          <td>{{ p.prix | number:'1.3-3' | prixDt }}</td>
+          <td>
+            <a class="btn btn-violet btn-sm me-2" [routerLink]="['/catalogue', p.id]">Détails</a>
+            <a class="btn btn-outline-light btn-sm me-2" [routerLink]="['/admin/modifier', p.id]">Modifier</a>
+            <button type="button" class="btn btn-danger btn-sm" (click)="aSupprimer.set(p.id)" [disabled]="enCours()">Supprimer</button>
+            @if (aSupprimer() === p.id) {
+              <p class="mt-2">Supprimer {{ p.nom }} ?</p>
+              <button class="btn btn-danger btn-sm me-2" type="button" (click)="onSupprimer(p.id)" [disabled]="enCours()">Confirmer</button>
+              <button class="btn btn-secondary btn-sm" type="button" (click)="aSupprimer.set('')" [disabled]="enCours()">Annuler</button>
+            }
+          </td>
+        </tr>
+      } @empty { <tr><td colspan="5">Aucun produit trouvé.</td></tr> }
+    </tbody>
+  </table>
+</div>
